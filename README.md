@@ -13,12 +13,13 @@ The demand for large zebrafish brain volume dataset is drastically rising these 
 
 The dataset which we have contains the volume data of 52 zebrafish. Each zebrafish`s volume data contains 14 2d slices of images from different depths. An example is shown below.
 
-![Figure 1](https://drive.google.com/drive/u/2/my-drive)
-   Each image has a resolution of 2048*2048 which makes it expensive to process them.      
+**![](https://lh6.googleusercontent.com/pL1ekl6bgEcpzWUfRvIJJUL1THEDFYyP28qtQIKAdkscfyhXomQWinsNtAs4A2TqK4NOkXFWv8WxzbXURTeMeNvP8vaAy2PNin0OtGSrF9bp3dtV5E8t3irm8nx6BZQBiOkTVKLKNgZ7cXyXFIjqPl7Ft8tMXZXcd9g6EiTB8PXbGE-A28TBV0qnIhOYYi2o)**                             figure 1
+
+Each image has a resolution of 2048*2048 which makes it expensive to process them.      
  ## Problem Statement
 In this project we want to generate 2D images given the condition of depth. These images should be high fidelity and high resolution. We tackle this problem using diffusion models as they are the state of art in generation currently.
 
-
+ ## Methodology
 
 
            
