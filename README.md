@@ -1,4 +1,4 @@
-﻿# Zebrafish brain image generation using Diffusion model
+﻿# Zebrafish Brain Volume Generation with Cascaded Guided Diffusion
 ------
 Jipeng Sun, Liqian Ma, Preetham Pareddy
 
@@ -15,11 +15,14 @@ The dataset which we have contains the volume data of 52 zebrafish. Each zebrafi
 
 **![](https://lh6.googleusercontent.com/pL1ekl6bgEcpzWUfRvIJJUL1THEDFYyP28qtQIKAdkscfyhXomQWinsNtAs4A2TqK4NOkXFWv8WxzbXURTeMeNvP8vaAy2PNin0OtGSrF9bp3dtV5E8t3irm8nx6BZQBiOkTVKLKNgZ7cXyXFIjqPl7Ft8tMXZXcd9g6EiTB8PXbGE-A28TBV0qnIhOYYi2o)**                             Figure 1
 
-Each image has a resolution of 2048*2048 which makes it expensive to process them.      
- ## Problem Statement
+Each image has a resolution of 2048*2048 which makes it expensive to process them.   
+   
+
+## Problem Statement
+
 In this project we want to generate 2D images given the condition of depth. These images should be high fidelity and high resolution. We tackle this problem using diffusion models as they are the state of art in generation currently.
 
- ## Methodology
+## Methodology
 
 *Forward Process*
 **![](https://lh4.googleusercontent.com/lIfbpfrXlGXATHBvfdO93j_zuKnJiICmXPlbUsXWgxP7L0HEq34qx5rX32r6nAZvKaO-8mchl3QJcwaYcOKnebM5mBYfgHaHAjX4UJWvU7vfh4KFjnn10_121muckGJeBn-gUhwtim0bQFgMwUK8x-AUWNKVACcq3isd6qDBLXWdl-JxJ0_Xci7vHkzcvNBi)**Figure 2
