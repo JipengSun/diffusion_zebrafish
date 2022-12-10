@@ -50,8 +50,15 @@ Overall, the proposed model is based on the classifier-free diffusion model.[4] 
 
 **![](https://lh5.googleusercontent.com/C9MrXRtzgY7SY4R-Slhbat2xsKJjER2cZOxocC7oGMgwCxcm6x9VL7a2NkRgnJvrJqPIbevp-KHO5HBb8F1kRTaA5tV2MxUlzdRfYevMc9-CrAE4Bec9bcBLTbCfIYuswrZ84tNKgWQ6pOUC85oRaWcaCz0gyktTQU22FR-FBV0T7YshrSpXhdZ68VXzYL47)**Figure 5
 
-We first trained a classical DDPM unconditional diffusion on the image dataset to get the baseline result. Figure 5 shows some training results near 300 epochs, we could see some blured outlines of the fish head.
+We first trained a classical DDPM unconditional diffusion on the image dataset to get the baseline result. Figure 5 shows some training results near 300 epochs, we could see some blured outlines of the fish head. However, there are several problems in design coming out:
 
+1. The model still can't learn the detailed features of the image.
+
+2. The generated results aren't calibrated in the center so that the stacked version of the volume doesn't have smooth outline of x-z projection.
+
+3. The L1 loss function isn't an effective metrics to represent the semantics similarity of the generated images.
+
+4. There is no clue for the model to genrate different depth of the volume.
 *Diffusion for a specific depth slices*
 
 **![](https://lh6.googleusercontent.com/LhqK3aEy3Kqvyo6d5AJCfRqRZh8s6e_ShUOB4OL6QDgWF8YSM84Hy6hHsdLHf5ZzfALTqF-_D4OGloQF5BkZKQG4esEDuR2p-t68iYTHvAZsbf5QFJomXBo00pX5Uo4t_3mS7FRHQchEY_N2HxVA0f0MLN2pAedOPNl0AEA04I25vN93PPcDHrruAXSQh49p)**Figure 6
