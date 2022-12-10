@@ -66,10 +66,10 @@ We first trained a classical DDPM unconditional diffusion on the image dataset t
 
 ## Future Work
 
- - Increase the size of the dataset by using data augmentation techniques and getting more data from the neuroscience lab
- - Condition the model on the previous depth slice. This helps to calibrate the model better and align the generated images of different depths. This will also help the model learn the difference between different focal lengths.
- - Try using other loss functions. We are currently using L1 loss which is not doing such a good job of representing the generation loss. We want to try other norms like L infinity etc.
- - We want to add attention blocks and residual blocks to our current architecture for robust results 
+ - Increase the size of the dataset by using data augmentation techniques and getting more data from the collaborating neuroscience lab.
+ - Condition the model on the previous depth slice. This helps to calibrate the model better and align the generated images of different depths. This will also help the model learn the difference between different depths.
+ - Try using other loss functions. We are currently using L1 loss which is not doing such a good job of representing the generation loss. We want to try other norms like SSIM/PSNR etc. But since loss function of the diffusion model is about minimizing the loss difference, how to combine the high-level into the optimizaion loop would be an interesting topics.
+ - We want to add attention blocks and residual blocks to our current architecture for robust results. Our current model is a classcal U-Net structure which has relatively lower capacity.
 
 ## Reference:
 
