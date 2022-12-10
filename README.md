@@ -59,10 +59,12 @@ We first trained a classical DDPM unconditional diffusion on the image dataset t
 3. The L1 loss function isn't an effective metrics to represent the semantics similarity of the generated images.
 
 4. There is no clue for the model to genrate different depth of the volume.
+
 *Diffusion for a specific depth slices*
 
 **![](https://lh6.googleusercontent.com/LhqK3aEy3Kqvyo6d5AJCfRqRZh8s6e_ShUOB4OL6QDgWF8YSM84Hy6hHsdLHf5ZzfALTqF-_D4OGloQF5BkZKQG4esEDuR2p-t68iYTHvAZsbf5QFJomXBo00pX5Uo4t_3mS7FRHQchEY_N2HxVA0f0MLN2pAedOPNl0AEA04I25vN93PPcDHrruAXSQh49p)**Figure 6
 
+We then tested training the model with only data from same depth, in other words, training the data within the same class label. The purpose of training with such setting is to test whether the data size for single label is large enough for model to learn when later adding guidance. We can see the previous  critiques still hold for this model and the current single-class data size is not enough to even generate meaningful features. Which strengthen our plan to get more training data.
 
 ## Future Work
 
