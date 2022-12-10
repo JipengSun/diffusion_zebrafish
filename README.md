@@ -1,4 +1,4 @@
-﻿# Zebrafish Brain Volume Generation with Cascaded Guided Diffusion
+# Zebrafish Brain Volume Generation with Cascaded Guided Diffusion
 ------
 Jipeng Sun, Liqian Ma, Preetham Pareddy
 
