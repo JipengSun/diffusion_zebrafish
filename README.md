@@ -26,7 +26,15 @@ The dataset which we have contains the volume data of 52 zebrafish. Each zebrafi
 **![](https://lh6.googleusercontent.com/pL1ekl6bgEcpzWUfRvIJJUL1THEDFYyP28qtQIKAdkscfyhXomQWinsNtAs4A2TqK4NOkXFWv8WxzbXURTeMeNvP8vaAy2PNin0OtGSrF9bp3dtV5E8t3irm8nx6BZQBiOkTVKLKNgZ7cXyXFIjqPl7Ft8tMXZXcd9g6EiTB8PXbGE-A28TBV0qnIhOYYi2o)**                             Figure 1
 
 Each image has a resolution of 2048*2048 which makes it expensive to process them.   
-   
+
+## Measuring Metrics
+
+We would expect our generated 2D image is as coherent as possible with the images in the given class, the coherent here specifically means:
+
+1. The silhouette of the image of the given depth label should match the given ground truth image as much as possible. Becuase the silhouette directly determines the shape of the volume.
+2. The generated image should consist the high-level features of the zebrafish structure.(eg. The eyes, the mouth, the tail)
+
+In that case, both the current semantics measurement metrics (perceptual loss/ SSIM) or distance based loss (L-norm) alone can't fit well for such requirement. We consider developing a more suitable metrics in the future.(Combination of high-paneltied outline difference and semantics similarity inside the shape)
 
 ## Methodology
 
