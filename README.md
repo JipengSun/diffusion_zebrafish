@@ -6,13 +6,18 @@ Contact: jipengsun2021@u.northwestern.edu
 
 CS496 Deep Generative Methods, Northwestern University
 
-Course Instructor: Bryan Pardo
+Course Instructor: Prof. Bryan Pardo
 
 **
 
 ## Motivation
 
 The demand for large zebrafish brain volume dataset is drastically rising these days. The usage for such datasets not only limits to extracting accurate neuron positions for neuroscience study purpose, but also used as the training dataset for developing deep learning based deconvolution algorithms for zebrafish microscopy study. However, due to the experimental difficulties of 3D imaging the zebrafish brain, there is no publicly available zebrafish volume dataset and the amount of data collected by individual lab is limited. As a result, the development of the training-based zebrafish microscopy algorithms is almost stagnant.
+
+## Problem Statement
+
+In this project we want to generate 2D images given the condition of depth. These images should be high fidelity and high resolution. We tackle this problem using diffusion models as they are the state of art in generation currently.
+
 
 ## Dataset
 
@@ -22,10 +27,6 @@ The dataset which we have contains the volume data of 52 zebrafish. Each zebrafi
 
 Each image has a resolution of 2048*2048 which makes it expensive to process them.   
    
-
-## Problem Statement
-
-In this project we want to generate 2D images given the condition of depth. These images should be high fidelity and high resolution. We tackle this problem using diffusion models as they are the state of art in generation currently.
 
 ## Methodology
 
@@ -61,6 +62,14 @@ Overall, the proposed model is based on the classifier-free diffusion model.[4] 
  - Try using other loss functions. We are currently using L1 loss which is not doing such a good job of representing the generation loss. We want to try other norms like L infinity etc.
  - We want to add attention blocks and residual blocks to our current architecture for robust results 
 
-           
+## Reference:
+
+Dhariwal, Prafulla, and Alexander Nichol. "Diffusion models beat gans on image synthesis." Advances in Neural Information Processing Systems 34 (2021): 8780-8794.
+
+Ho, Jonathan, Ajay Jain, and Pieter Abbeel. "Denoising diffusion probabilistic models." Advances in Neural Information Processing Systems 33 (2020): 6840-6851.
+
+Ho, Jonathan, and Tim Salimans. "Classifier-free diffusion guidance." arXiv preprint arXiv:2207.12598 (2022).
+
+Ho, Jonathan, et al. "Cascaded Diffusion Models for High Fidelity Image Generation." J. Mach. Learn. Res. 23 (2022): 47-1.
 
 	 
