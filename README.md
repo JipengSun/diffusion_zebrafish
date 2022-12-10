@@ -2,6 +2,12 @@
 ------
 Jipeng Sun, Liqian Ma, Preetham Pareddy
 
+Contact: jipengsun2021@u.northwestern.edu
+
+CS496 Deep Generative Methods, Northwestern University
+
+Course Instructor: Bryan Pardo
+
 **
 
 ## Motivation
