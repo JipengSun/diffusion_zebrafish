@@ -43,7 +43,7 @@ Each image has a resolution of 2048*2048 which makes it expensive to process the
 
 Zebrafish Brain Volumetric Data Generation with Classifier-Free Cascaded Diffusion
 
-Overall, the proposed model is based on the classifier-free diffusion model.[4] The model treats each depth of the volume as an independent class and uses the diffusion model to generate the corresponding image based on the given depth condition. To match the high resolution requirement for the microscopy deconvolution usage, we then designed super-resolution module to gradually upsample the images generated from the previous low-resolution diffusion model. The beginning resolution diffusion is 64 × 64, after three upsampling diffusion models, the final generated images are in the resolution of 512 × 512.
+Overall, the proposed model is based on the classifier-free diffusion model.[1] The model treats each depth of the volume as an independent class and uses the diffusion model to generate the corresponding image based on the given depth condition. To match the high resolution requirement for the microscopy deconvolution usage, we then designed super-resolution module to gradually upsample the images generated from the previous low-resolution diffusion model. The beginning resolution diffusion is 64 × 64, after three upsampling diffusion models, the final generated images are in the resolution of 512 × 512.
  ## Results
 
 *Unconditioned Diffusion*
