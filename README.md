@@ -16,7 +16,7 @@ In this project we want to generate 2D images of zebrafish brain, given the cond
 
 The dataset for this generation task is collected from the neuroscience lab at Northwestern. It contains the volume data of 52 zebrafish. The volume of each zebrafish brain contains 14 2d slices of images from different depths. An example is shown below.
 
-![](https://lh6.googleusercontent.com/pL1ekl6bgEcpzWUfRvIJJUL1THEDFYyP28qtQIKAdkscfyhXomQWinsNtAs4A2TqK4NOkXFWv8WxzbXURTeMeNvP8vaAy2PNin0OtGSrF9bp3dtV5E8t3irm8nx6BZQBiOkTVKLKNgZ7cXyXFIjqPl7Ft8tMXZXcd9g6EiTB8PXbGE-A28TBV0qnIhOYYi2o)**                             Figure 1
+![](https://lh6.googleusercontent.com/pL1ekl6bgEcpzWUfRvIJJUL1THEDFYyP28qtQIKAdkscfyhXomQWinsNtAs4A2TqK4NOkXFWv8WxzbXURTeMeNvP8vaAy2PNin0OtGSrF9bp3dtV5E8t3irm8nx6BZQBiOkTVKLKNgZ7cXyXFIjqPl7Ft8tMXZXcd9g6EiTB8PXbGE-A28TBV0qnIhOYYi2o)                        *Figure 1 - Slices of the same zebrafish brain at different depths.*
 
 Each image has a resolution of 2048*2048 which makes it expensive to process them. The dataset is limited to 52 because it is difficult to create such high resolution data at a high magnification level. Sophisticated microscopes and cameras need to be used for this purpose ( because they have to be accurate at the scale of a few micro meters) and therefore it is expensive to create. 
    
@@ -25,7 +25,7 @@ Each image has a resolution of 2048*2048 which makes it expensive to process the
 
 **Diffusion model**
 
- - ****Forward Process**** : This is the step in which noise is added to the image. Given an image and the timestep as inputs, a noisier version of it is obtained as the output. Since timestep is also an input in this process, the noise can be modeled for each timestep separately instead of it being sequential. Note that no model is required for this step. The noise levels/ variances can be precomputed. The below image shows an example of what this process looks like.
+ - **Forward Process** : This is the step in which noise is added to the image. Given an image and the timestep as inputs, a noisier version of it is obtained as the output. Since timestep is also an input in this process, the noise can be modeled for each timestep separately instead of it being sequential. Note that no model is required for this step. The noise levels/ variances can be precomputed. The below image shows an example of what this process looks like.
 
 ![](https://lh4.googleusercontent.com/lIfbpfrXlGXATHBvfdO93j_zuKnJiICmXPlbUsXWgxP7L0HEq34qx5rX32r6nAZvKaO-8mchl3QJcwaYcOKnebM5mBYfgHaHAjX4UJWvU7vfh4KFjnn10_121muckGJeBn-gUhwtim0bQFgMwUK8x-AUWNKVACcq3isd6qDBLXWdl-JxJ0_Xci7vHkzcvNBi)*Figure 2 - Diffusion model forward pass* 
  
@@ -33,7 +33,7 @@ Each image has a resolution of 2048*2048 which makes it expensive to process the
 
 ![](https://lh6.googleusercontent.com/4ZkKwaRpRIlStOIwrzEMvB3vDqnNDuBkRKtYeBp_6KlAt8VYisCvoe45p3PnuFv9YGUvm0bxmvlQVgs_DWngB6Ip4tBGjjuECuvAaWYNAuzaDJJA76d0mkk4gljAvFHBj8bG2edvJqodqr3i320ZD3JMOLHYxcEWL10F2Oija2zpqJJk8jSOtXvDgynZ3Ap6)*Figure 3 - U-net is used to predict the noise in an image*
 
-****Cascaded Diffusion model****
+**Cascaded Diffusion model**
 
 
 ![](https://lh3.googleusercontent.com/0CGog3por1g-ahTc5t3c4QXHAa5UlR8y3a4ZvwOdl3rL8WcAoS_J93muC6p8x4ZonKStDItCS1eibNvlepHwQsOeaVBpdNZTbQBgb0wGQ7GsI1CyIUM_GqfQTZb_dHhwItMLbK3sBd5ibWmvC-xERa5eL1gSKIPnty-9H82WujBDxfJM7asz9lCOY6Db24w1)*Figure 4 - Cascaded Diffusion approach*
@@ -44,14 +44,15 @@ We experimented with another approach which is based on the classifier-free diff
 
 In the context of generating 2D images given depth, it is important for the model to learn what the higher depth and lower depth image would look like because that information is important to gain volume information. For example, if the current image has a depth label of 80 micrometers, it is important to have representation of 70 micrometers depth label images and 90 micrometers depth label images because otherwise the model would not learn the overall structure (volume) of the brain. Therefore, it is advantageous to add previous depth slice and the next depth slice as additional information to the input.
 
- ## Results
+## Results
+
  
  **Evaluation Metrics**
  
 The loss function used is L1 loss between the predicted noise and original noise. It doesn't seem to be doing a very good job if you look at figure 5 because even though the final loss is less (0.4), the generated image is not very similar to the original image structure. So it is better to experiment on other loss functions like L2, L-infinity etc.
 Manual judgment would be the most accurate in determining the quality of the images.  Measuring structural coherence with the brain volume is a more complex task. Relying on human judgement, and softwares like blender which helps build 3D models by using 2D images is the best course of action to determine quality of the volume generated.
 
-****Diffusion Model****
+**Diffusion Model**
 
 ![](https://lh5.googleusercontent.com/C9MrXRtzgY7SY4R-Slhbat2xsKJjER2cZOxocC7oGMgwCxcm6x9VL7a2NkRgnJvrJqPIbevp-KHO5HBb8F1kRTaA5tV2MxUlzdRfYevMc9-CrAE4Bec9bcBLTbCfIYuswrZ84tNKgWQ6pOUC85oRaWcaCz0gyktTQU22FR-FBV0T7YshrSpXhdZ68VXzYL47)*Figure 5 - Results of the diffusion model at epoch 300*
 
