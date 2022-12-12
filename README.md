@@ -2,7 +2,7 @@
 ------
 Jipeng Sun, Liqian Ma, Preetham Pareddy
 
-**
+
 
 ## Motivation
 
@@ -16,7 +16,7 @@ In this project we want to generate 2D images of zebrafish brain, given the cond
 
 The dataset for this generation task is collected from the neuroscience lab at Northwestern. It contains the volume data of 52 zebrafish. The volume of each zebrafish brain contains 14 2d slices of images from different depths. An example is shown below.
 
-**![](https://lh6.googleusercontent.com/pL1ekl6bgEcpzWUfRvIJJUL1THEDFYyP28qtQIKAdkscfyhXomQWinsNtAs4A2TqK4NOkXFWv8WxzbXURTeMeNvP8vaAy2PNin0OtGSrF9bp3dtV5E8t3irm8nx6BZQBiOkTVKLKNgZ7cXyXFIjqPl7Ft8tMXZXcd9g6EiTB8PXbGE-A28TBV0qnIhOYYi2o)**                             Figure 1
+![](https://lh6.googleusercontent.com/pL1ekl6bgEcpzWUfRvIJJUL1THEDFYyP28qtQIKAdkscfyhXomQWinsNtAs4A2TqK4NOkXFWv8WxzbXURTeMeNvP8vaAy2PNin0OtGSrF9bp3dtV5E8t3irm8nx6BZQBiOkTVKLKNgZ7cXyXFIjqPl7Ft8tMXZXcd9g6EiTB8PXbGE-A28TBV0qnIhOYYi2o)**                             Figure 1
 
 Each image has a resolution of 2048*2048 which makes it expensive to process them. The dataset is limited to 52 because it is difficult to create such high resolution data at a high magnification level. Sophisticated microscopes and cameras need to be used for this purpose ( because they have to be accurate at the scale of a few micro meters) and therefore it is expensive to create. 
    
@@ -26,10 +26,12 @@ Each image has a resolution of 2048*2048 which makes it expensive to process the
 **Diffusion model**
 
  - ****Forward Process**** : This is the step in which noise is added to the image. Given an image and the timestep as inputs, a noisier version of it is obtained as the output. Since timestep is also an input in this process, the noise can be modeled for each timestep separately instead of it being sequential. Note that no model is required for this step. The noise levels/ variances can be precomputed. The below image shows an example of what this process looks like.
-**![](https://lh4.googleusercontent.com/lIfbpfrXlGXATHBvfdO93j_zuKnJiICmXPlbUsXWgxP7L0HEq34qx5rX32r6nAZvKaO-8mchl3QJcwaYcOKnebM5mBYfgHaHAjX4UJWvU7vfh4KFjnn10_121muckGJeBn-gUhwtim0bQFgMwUK8x-AUWNKVACcq3isd6qDBLXWdl-JxJ0_Xci7vHkzcvNBi)***Figure 2 - Diffusion model forward pass* 
+
+![](https://lh4.googleusercontent.com/lIfbpfrXlGXATHBvfdO93j_zuKnJiICmXPlbUsXWgxP7L0HEq34qx5rX32r6nAZvKaO-8mchl3QJcwaYcOKnebM5mBYfgHaHAjX4UJWvU7vfh4KFjnn10_121muckGJeBn-gUhwtim0bQFgMwUK8x-AUWNKVACcq3isd6qDBLXWdl-JxJ0_Xci7vHkzcvNBi)*Figure 2 - Diffusion model forward pass* 
  
  - **Backward Process** : This is the step in which the model predicts the noise in the image. A simple U-net is used for this purpose. The input to the model is the noisy image and the output is the noise in that image (the mean of the noise to be more exact as variance is fixed). As the parameters are shared across all the timesteps, it is important to give the timestep to the network. Note that the timesteps are encoded in the sinusoidal embedding format that is used in transformers. Each image is further labelled as shown in the bottom left of the image. Since there are 14 depth slices, each image has a 14 length long vector which contains a 1 at the particular depth position and 0 everywhere else. This additional information is what makes this process condition diffusion
-**![](https://lh6.googleusercontent.com/4ZkKwaRpRIlStOIwrzEMvB3vDqnNDuBkRKtYeBp_6KlAt8VYisCvoe45p3PnuFv9YGUvm0bxmvlQVgs_DWngB6Ip4tBGjjuECuvAaWYNAuzaDJJA76d0mkk4gljAvFHBj8bG2edvJqodqr3i320ZD3JMOLHYxcEWL10F2Oija2zpqJJk8jSOtXvDgynZ3Ap6)***Figure 3 - U-net is used to predict the noise in an image*
+
+![](https://lh6.googleusercontent.com/4ZkKwaRpRIlStOIwrzEMvB3vDqnNDuBkRKtYeBp_6KlAt8VYisCvoe45p3PnuFv9YGUvm0bxmvlQVgs_DWngB6Ip4tBGjjuECuvAaWYNAuzaDJJA76d0mkk4gljAvFHBj8bG2edvJqodqr3i320ZD3JMOLHYxcEWL10F2Oija2zpqJJk8jSOtXvDgynZ3Ap6)*Figure 3 - U-net is used to predict the noise in an image*
 
 ****Cascaded Diffusion model****
 
@@ -39,6 +41,7 @@ Each image has a resolution of 2048*2048 which makes it expensive to process the
 We experimented with another approach which is based on the classifier-free diffusion model. The model treats each depth of the volume as an independent class and uses the diffusion model to generate the corresponding image based on the given depth condition. For example, the model uses all the 80 micro meter slices to generate 80 micro meter images but not other depth. This approach guarantees better dependency on the depth which will help in the overall volume structure coherence. To match the high resolution requirement for the microscopy deconvolution usage, we then designed super-resolution module to gradually upsample the images generated from the previous low-resolution diffusion model. The beginning resolution diffusion is 64 × 64, after three upsampling diffusion models, the final generated images are in the resolution of 512 × 512. But since we have data for only 52 zebrafish brain, the training data for one depth model would contain only 52 images which is too less. 
 
 **Coherence**
+
 In the context of generating 2D images given depth, it is important for the model to learn what the higher depth and lower depth image would look like because that information is important to gain volume information. For example, if the current image has a depth label of 80 micrometers, it is important to have representation of 70 micrometers depth label images and 90 micrometers depth label images because otherwise the model would not learn the overall structure (volume) of the brain. Therefore, it is advantageous to add previous depth slice and the next depth slice as additional information to the input.
 
  ## Results
